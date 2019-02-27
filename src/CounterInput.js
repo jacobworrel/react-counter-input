@@ -2,6 +2,9 @@ import React from 'react';
 
 /**
  * todo:
+ * - add onCountChange handler to lift state out of CounterInput
+ * ->  invoke onCountChange anytime count is changed
+ *
  * - enzyme unit tests
  * - set up travis/coveralls
  */
