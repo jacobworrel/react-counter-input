@@ -1,10 +1,9 @@
 import React from 'react';
 
 /**
- * todo
- * 1) implement min/max
- * 2) enzyme unit tests
- * 3) set up travis/coveralls
+ * todo:
+ * - enzyme unit tests
+ * - set up travis/coveralls
  */
 
 class CounterInput extends React.Component {
@@ -23,6 +22,13 @@ class CounterInput extends React.Component {
   }
 
   increment () {
+    const { count } = this.state;
+    const { max } = this.props;
+
+    if (count >= max) {
+      return;
+    }
+
     this.setState(state => {
       const count = state.count + 1;
 
@@ -34,6 +40,13 @@ class CounterInput extends React.Component {
   }
 
   decrement () {
+    const { count } = this.state;
+    const { min } = this.props;
+
+    if (count <= min) {
+      return;
+    }
+
     this.setState(state => {
       const count = state.count - 1;
       return {
@@ -44,11 +57,16 @@ class CounterInput extends React.Component {
   }
 
   handleBlur () {
-    const { inputValue } = this.state;
-    const num = parseInt(inputValue);
+    const { inputValue, count } = this.state;
+    let num = parseInt(inputValue);
+    num = num > this.props.max ? this.props.max : num;
+    num = num < this.props.min ? this.props.min : num;
 
-    if (isNaN(num) === false) {
-      this.setState({ count: num });
+    if (isNaN(num) === true) {
+      this.setState({ inputValue: count });
+    }
+    else {
+      this.setState({ count: num, inputValue: num });
     }
   }
 
@@ -62,7 +80,7 @@ class CounterInput extends React.Component {
       handleChange: this.handleChange,
       handleBlur: this.handleBlur,
       increment: this.increment,
-      inputValue: this.state.inputValue,
+      state: this.state,
     })
   }
 }
@@ -92,7 +110,7 @@ const renderChildren = ({
   handleChange,
   handleBlur,
   increment,
-  inputValue
+  state: { inputValue, isDisabledDecrement, isDisabledIncrement }
 }) => (
   <div style={wrapperStyle}>
     <div style={btnStyle} onClick={decrement}>&#8722;</div>
@@ -109,6 +127,8 @@ const renderChildren = ({
 
 CounterInput.defaultProps = {
   children: renderChildren,
+  min: -Infinity,
+  max: Infinity,
 };
 
 export default CounterInput;
