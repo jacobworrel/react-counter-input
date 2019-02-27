@@ -1,4 +1,11 @@
-import React from 'react'
+import React from 'react';
+
+/**
+ * todo
+ * 1) implement min/max
+ * 2) enzyme unit tests
+ * 3) set up travis/coveralls
+ */
 
 class CounterInput extends React.Component {
   constructor (props) {
@@ -50,21 +57,58 @@ class CounterInput extends React.Component {
   }
 
   render() {
-    return(
-      <div>
-        <div>
-          <span onClick={this.decrement}>-</span>
-          <input
-            type="text"
-            value={this.state.inputValue}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-          />
-          <span onClick={this.increment}>+</span>
-        </div>
-      </div>
-    );
+    return this.props.children({
+      decrement: this.decrement,
+      handleChange: this.handleChange,
+      handleBlur: this.handleBlur,
+      increment: this.increment,
+      inputValue: this.state.inputValue,
+    })
   }
 }
+
+const wrapperStyle = {
+  display: 'flex',
+  alignItems: 'center',
+};
+
+const btnStyle = {
+  cursor: 'pointer',
+  padding: 10,
+};
+
+const inputStyle = {
+  width: 40,
+  height: 20,
+  background: 'none',
+  border: 'none',
+  padding: 5,
+  textAlign: 'center',
+  fontSize: '1em',
+};
+
+const renderChildren = ({
+  decrement,
+  handleChange,
+  handleBlur,
+  increment,
+  inputValue
+}) => (
+  <div style={wrapperStyle}>
+    <div style={btnStyle} onClick={decrement}>&#8722;</div>
+    <input
+      style={inputStyle}
+      type="text"
+      value={inputValue}
+      onChange={handleChange}
+      onBlur={handleBlur}
+    />
+    <div style={btnStyle} onClick={increment}>&#43;</div>
+  </div>
+);
+
+CounterInput.defaultProps = {
+  children: renderChildren,
+};
 
 export default CounterInput;
