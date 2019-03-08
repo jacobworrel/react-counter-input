@@ -14,14 +14,23 @@ class CounterInput extends React.Component {
     super(props);
 
     this.state = {
-      count: this.props.defaultCount,
-      inputValue: this.props.defaultCount,
+      count: this.props.count,
+      inputValue: this.props.count,
     };
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.count !== this.props.count) {
+      this.setState({
+        count: this.props.count,
+        inputValue: this.props.count,
+      });
+    }
   }
 
   increment () {
@@ -130,7 +139,7 @@ const renderChildren = ({
 
 CounterInput.defaultProps = {
   children: renderChildren,
-  defaultCount: 0,
+  count: 0,
   max: Infinity,
   min: -Infinity,
 };

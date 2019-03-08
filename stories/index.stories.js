@@ -6,16 +6,34 @@ import { linkTo } from '@storybook/addon-links';
 
 import CounterInput from '../src';
 
+export function generateRandomNum (a, b) {
+  return Math.floor(Math.random() * b) + a;
+}
+
 class MockContainer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       count: 0,
     };
+
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+  }
+
+  handleBtnClick () {
+    const rand = generateRandomNum(1, 5);
+
+    this.setState({ count: rand });
   }
 
   render () {
-    return this.props.children({ count: this.state.count });
+    return (
+      <React.Fragment>
+        <div>Container count: {this.state.count}</div>
+        {this.props.renderCounter({ count: this.state.count })}
+        <button onClick={this.handleBtnClick}>Change Container Count</button>
+      </React.Fragment>
+    );
   }
 }
 
@@ -27,9 +45,19 @@ storiesOf('Counter Input', module)
       <CounterInput min={0} max={5}/>
     </div>
   ))
-  .add('default count', () => (
+  .add('count from props', () => (
     <div>
-      <h4>default count = 5</h4>
-      <CounterInput defaultCount={5}/>
+      <h4>props.count = 5</h4>
+      <CounterInput count={5}/>
+    </div>
+  ))
+  .add('with container', () => (
+    <div>
+      <h4></h4>
+      <MockContainer
+        renderCounter={({ count }) => (
+          <CounterInput count={count} />
+        )}
+      />
     </div>
   ));
