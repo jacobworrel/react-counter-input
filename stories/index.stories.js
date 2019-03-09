@@ -2,7 +2,7 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+// import { linkTo } from '@storybook/addon-links';
 
 import CounterInput from '../src';
 
@@ -16,21 +16,25 @@ class MockContainer extends React.Component {
     this.state = {
       count: 0,
     };
-
-    this.handleBtnClick = this.handleBtnClick.bind(this);
   }
 
-  handleBtnClick () {
+  handleBtnClick = () => {
     const rand = generateRandomNum(1, 5);
-
     this.setState({ count: rand });
-  }
+  };
+
+  syncCount = (count) => {
+    this.setState({ count });
+  };
 
   render () {
     return (
       <React.Fragment>
         <div>Container count: {this.state.count}</div>
-        {this.props.renderCounter({ count: this.state.count })}
+        {this.props.renderCounter({
+          count: this.state.count,
+          syncCount: this.syncCount,
+        })}
         <button onClick={this.handleBtnClick}>Change Container Count</button>
       </React.Fragment>
     );
@@ -53,7 +57,6 @@ storiesOf('Counter Input', module)
   ))
   .add('with container', () => (
     <div>
-      <h4></h4>
       <MockContainer
         renderCounter={({ count }) => (
           <CounterInput count={count} />
@@ -63,12 +66,23 @@ storiesOf('Counter Input', module)
   ))
   .add('with container + onCountChange', () => (
     <div>
-      <h4></h4>
       <MockContainer
         renderCounter={({ count }) => (
           <CounterInput
             count={count}
             onCountChange={action('count-change')}
+          />
+        )}
+      />
+    </div>
+  ))
+  .add('with container + onCountChange + synced count state', () => (
+    <div>
+      <MockContainer
+        renderCounter={({ count, syncCount }) => (
+          <CounterInput
+            count={count}
+            onCountChange={syncCount}
           />
         )}
       />
