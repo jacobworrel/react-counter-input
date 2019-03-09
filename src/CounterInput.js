@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 
 /**
  * todo
+ * - custom children render prop story
  * - custom styles story
  * - set up jest
  * - enzyme unit tests
- * - set up travis/coveralls
+ * - publish to npm
+ * - snapshot tests
+ * - set up travis
+ * - set up coveralls
+ * - deploy storybook
  */
 
 class CounterInput extends React.Component {
