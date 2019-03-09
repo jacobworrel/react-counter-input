@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
+ * todo
+ * - custom styles story
+ * - set up jest
  * - enzyme unit tests
  * - set up travis/coveralls
  */
