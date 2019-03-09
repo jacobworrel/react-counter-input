@@ -1,10 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
- * todo:
- * - add onCountChange handler to lift state out of CounterInput
- * ->  invoke onCountChange anytime count is changed
- *
  * - enzyme unit tests
  * - set up travis/coveralls
  */
@@ -17,41 +14,42 @@ class CounterInput extends React.Component {
       count: this.props.count,
       inputValue: this.props.count,
     };
-
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.count !== this.props.count) {
-      this.setState({
-        count: this.props.count,
-        inputValue: this.props.count,
-      });
+      this.setState(
+        {
+          count: this.props.count,
+          inputValue: this.props.count,
+        },
+        this.handleChangeCount
+      );
     }
   }
 
-  increment () {
+  increment = () => {
     const { count } = this.state;
-    const { max } = this.props;
+    const { max, onCountChange } = this.props;
 
     if (count >= max) {
       return;
     }
 
-    this.setState(state => {
-      const count = state.count + 1;
+    this.setState(
+      state => {
+        const count = state.count + 1;
 
-      return {
-        count,
-        inputValue: count,
-      };
-    });
-  }
+        return {
+          count,
+          inputValue: count,
+        };
+      },
+      this.handleChangeCount
+    );
+  };
 
-  decrement () {
+  decrement = () => {
     const { count } = this.state;
     const { min } = this.props;
 
@@ -59,16 +57,19 @@ class CounterInput extends React.Component {
       return;
     }
 
-    this.setState(state => {
-      const count = state.count - 1;
-      return {
-        count,
-        inputValue: count,
-      };
-    });
-  }
+    this.setState(
+      state => {
+        const count = state.count - 1;
+        return {
+          count,
+          inputValue: count,
+        };
+      },
+      this.handleChangeCount
+    );
+  };
 
-  handleBlur () {
+  handleBlur  = () => {
     const { inputValue, count } = this.state;
     let num = parseInt(inputValue);
     num = num > this.props.max ? this.props.max : num;
@@ -78,18 +79,30 @@ class CounterInput extends React.Component {
       this.setState({ inputValue: count });
     }
     else {
-      this.setState({ count: num, inputValue: num });
+      this.setState(
+        {
+          count: num,
+          inputValue: num,
+        },
+        this.handleChangeCount
+      );
     }
-  }
+  };
 
-  handleChange ({ target: { value: inputValue }}) {
+  handleChangeCount = () => {
+    if (this.props.onCountChange !== undefined) {
+      this.props.onCountChange(this.state.count);
+    }
+  };
+
+  handleChangeInput = ({ target: { value: inputValue }}) => {
     this.setState({ inputValue });
-  }
+  };
 
   render() {
     return this.props.children({
       decrement: this.decrement,
-      handleChange: this.handleChange,
+      handleChangeInput: this.handleChangeInput,
       handleBlur: this.handleBlur,
       increment: this.increment,
       state: this.state,
@@ -119,7 +132,7 @@ const inputStyle = {
 
 const renderChildren = ({
   decrement,
-  handleChange,
+  handleChangeInput,
   handleBlur,
   increment,
   state: { inputValue, isDisabledDecrement, isDisabledIncrement }
@@ -130,7 +143,7 @@ const renderChildren = ({
       style={inputStyle}
       type="text"
       value={inputValue}
-      onChange={handleChange}
+      onChange={handleChangeInput}
       onBlur={handleBlur}
     />
     <div style={btnStyle} onClick={increment}>&#43;</div>
@@ -142,6 +155,13 @@ CounterInput.defaultProps = {
   count: 0,
   max: Infinity,
   min: -Infinity,
+};
+
+CounterInput.propTypes = {
+  count: PropTypes.number,
+  max: PropTypes.number,
+  min: PropTypes.number,
+  onCountChange: PropTypes.func,
 };
 
 export default CounterInput;

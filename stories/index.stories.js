@@ -60,4 +60,17 @@ storiesOf('Counter Input', module)
         )}
       />
     </div>
+  ))
+  .add('with container + onCountChange', () => (
+    <div>
+      <h4></h4>
+      <MockContainer
+        renderCounter={({ count }) => (
+          <CounterInput
+            count={count}
+            onCountChange={action('count-change')}
+          />
+        )}
+      />
+    </div>
   ));
