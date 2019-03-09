@@ -36,20 +36,20 @@ For more examples, check out the [Storybook][storybook].
 
 ## Props
 
-### `count`
+### children
+>`function` | optional
+
+### count
 > `number` | optional, defaults to `0`
-
-### onCountChange
-> `function` | optional
-
-### min
-> `number` | optional
 
 ### max
 > `number` | optional
 
-### children
->`function` | optional
+### min
+> `number` | optional
+
+### onCountChange
+> `function` | optional
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
