@@ -61,4 +61,4 @@ For more examples, check out the [Storybook][storybook].
 [coveralls]: https://coveralls.io/github/user/repo
 
 [storybook-badge]: https://github.com/storybooks/brand/blob/master/badge/badge-storybook.svg
-[storybook]: https://peaceful-leavitt-38971b.netlify.com
+[storybook]: https://silly-saha-7183e3.netlify.com
