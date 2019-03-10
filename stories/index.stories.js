@@ -87,4 +87,37 @@ storiesOf('Counter Input', module)
         )}
       />
     </div>
+  ))
+  .add('with children render prop', () => (
+    <div>
+      <CounterInput>
+        {({
+          decrement,
+          handleChangeInput,
+          handleBlur,
+          increment,
+          state: { inputValue }
+        }) => (
+          <div>
+            <button onClick={decrement}>decrement</button>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleChangeInput}
+              onBlur={handleBlur}
+            />
+            <button onClick={increment}>increment</button>
+          </div>
+        )}
+      </CounterInput>
+    </div>
+  ))
+  .add('custom wrapper, input & button styles', () => (
+    <div>
+      <CounterInput
+        btnStyle={{ color: 'red' }}
+        inputStyle={{ color: 'red' }}
+        wrapperStyle={{ backgroundColor: 'black', width: 110 }}
+      />
+    </div>
   ));

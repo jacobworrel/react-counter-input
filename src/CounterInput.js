@@ -3,15 +3,10 @@ import PropTypes from 'prop-types';
 
 /**
  * todo
- * - custom children render prop story
- * - custom styles story
- * - set up jest
  * - enzyme unit tests
- * - publish to npm
  * - snapshot tests
  * - set up travis
  * - set up coveralls
- * - deploy storybook
  */
 
 class CounterInput extends React.Component {
@@ -36,27 +31,6 @@ class CounterInput extends React.Component {
     }
   }
 
-  increment = () => {
-    const { count } = this.state;
-    const { max, onCountChange } = this.props;
-
-    if (count >= max) {
-      return;
-    }
-
-    this.setState(
-      state => {
-        const count = state.count + 1;
-
-        return {
-          count,
-          inputValue: count,
-        };
-      },
-      this.handleChangeCount
-    );
-  };
-
   decrement = () => {
     const { count } = this.state;
     const { min } = this.props;
@@ -68,6 +42,27 @@ class CounterInput extends React.Component {
     this.setState(
       state => {
         const count = state.count - 1;
+        return {
+          count,
+          inputValue: count,
+        };
+      },
+      this.handleChangeCount
+    );
+  };
+
+  increment = () => {
+    const { count } = this.state;
+    const { max } = this.props;
+
+    if (count >= max) {
+      return;
+    }
+
+    this.setState(
+      state => {
+        const count = state.count + 1;
+
         return {
           count,
           inputValue: count,
@@ -109,6 +104,20 @@ class CounterInput extends React.Component {
 
   render() {
     return this.props.children({
+      style: {
+        wrapperStyle: {
+          ...wrapperStyle,
+          ...this.props.wrapperStyle,
+        },
+        btnStyle: {
+          ...btnStyle,
+          ...this.props.btnStyle,
+        },
+        inputStyle: {
+          ...inputStyle,
+          ...this.props.inputStyle,
+        },
+      },
       decrement: this.decrement,
       handleChangeInput: this.handleChangeInput,
       handleBlur: this.handleBlur,
@@ -143,18 +152,19 @@ const renderChildren = ({
   handleChangeInput,
   handleBlur,
   increment,
-  state: { inputValue, isDisabledDecrement, isDisabledIncrement }
+  state: { inputValue },
+  style = {},
 }) => (
-  <div style={wrapperStyle}>
-    <div style={btnStyle} onClick={decrement}>&#8722;</div>
+  <div style={style.wrapperStyle}>
+    <div style={style.btnStyle} onClick={decrement}>&#8722;</div>
     <input
-      style={inputStyle}
+      style={style.inputStyle}
       type="text"
       value={inputValue}
       onChange={handleChangeInput}
       onBlur={handleBlur}
     />
-    <div style={btnStyle} onClick={increment}>&#43;</div>
+    <div style={style.btnStyle} onClick={increment}>&#43;</div>
   </div>
 );
 

@@ -51,11 +51,20 @@ For more examples, check out the [Storybook][storybook].
 ### onCountChange
 > `function` | optional
 
+### wrapperStyle
+> `object` | optional
+
+### btnStyle
+> `object` | optional
+
+### inputStyle
+> `object` | optional
+
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+[npm-badge]: https://img.shields.io/npm/v/react-counter-input.png?style=flat-square
+[npm]: https://www.npmjs.org/package/react-counter-input
 
 [coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/user/repo
