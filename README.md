@@ -60,14 +60,14 @@ For more examples, check out the [Storybook][storybook].
 ### inputStyle
 > `object` | optional
 
-[build-badge]: https://img.shields.io/travis/user/react-counter-input/master.png?style=flat-square
-[build]: https://travis-ci.org/user/react-counter-input
+[build-badge]: https://img.shields.io/travis/jacobworrel/react-counter-input/master.png?style=flat-square
+[build]: https://travis-ci.org/jacobworrel/react-counter-input
 
 [npm-badge]: https://img.shields.io/npm/v/react-counter-input.png?style=flat-square
 [npm]: https://www.npmjs.org/package/react-counter-input
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/react-counter-input/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/react-counter-input
+[coveralls-badge]: https://img.shields.io/coveralls/jacobworrel/react-counter-input/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/jacobworrel/react-counter-input
 
 [storybook-badge]: https://github.com/storybooks/brand/blob/master/badge/badge-storybook.svg
 [storybook]: https://silly-saha-7183e3.netlify.com
