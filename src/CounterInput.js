@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 /**
  * todo
- * - enzyme unit tests
- * - snapshot tests
+ * - finish enzyme unit tests
  * - set up travis
  * - set up coveralls
+ * - coerce input value toString() when type number
+ * - set up flow
+ * - snapshot tests
  */
 
 class CounterInput extends React.Component {

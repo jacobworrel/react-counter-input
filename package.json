@@ -1,7 +1,7 @@
 {
   "name": "react-counter-input",
   "version": "0.2.0",
-  "description": "react-counter-input React component",
+  "description": "A flexible counter input component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -15,7 +15,7 @@
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
