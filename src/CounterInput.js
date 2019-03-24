@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * todo
- * - finish enzyme unit tests (100% test coverage)
  * - coerce input value toString() when type number (publish 0.2.1)
- * - update readme: add descriptions to props section, add codesandbox demo
  * - set up flow
  * - snapshot tests
  */
