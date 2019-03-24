@@ -154,7 +154,7 @@ const renderChildren = ({
   handleBlur,
   increment,
   state: { inputValue },
-  style = {},
+  style,
 }) => (
   <div style={style.wrapperStyle}>
     <div style={style.btnStyle} onClick={decrement}>&#8722;</div>

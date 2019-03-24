@@ -149,4 +149,24 @@ describe(`CounterInput`, () => {
       wrapper.find('input').getDOMNode().value.should.equal('0');
     });
   });
+
+  describe(`when input value is greater than max`, () => {
+    it(`should change value to max`, () => {
+      const wrapper = mount(<CounterInput count={0} max={5}/>);
+      wrapper.find('input').prop('onChange')({ target: { value: '10' }});
+      wrapper.find('input').prop('onBlur')();
+
+      wrapper.find('input').getDOMNode().value.should.equal('5');
+    });
+  });
+
+  describe(`when input value is less than min`, () => {
+    it(`should change value to min`, () => {
+      const wrapper = mount(<CounterInput count={10} min={5}/>);
+      wrapper.find('input').prop('onChange')({ target: { value: '0' }});
+      wrapper.find('input').prop('onBlur')();
+
+      wrapper.find('input').getDOMNode().value.should.equal('5');
+    });
+  });
 });
