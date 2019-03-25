@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 /**
  * todo
- * - coerce input value toString() when type number (publish 0.2.1)
- * - set up flow
+ * - set up flow?
  * - snapshot tests
  */
 
@@ -23,7 +22,7 @@ class CounterInput extends React.Component {
       this.setState(
         {
           count: this.props.count,
-          inputValue: this.props.count,
+          inputValue: this.props.count.toString(),
         },
         this.handleChangeCount
       );
@@ -43,7 +42,7 @@ class CounterInput extends React.Component {
         const count = state.count - 1;
         return {
           count,
-          inputValue: count,
+          inputValue: count.toString(),
         };
       },
       this.handleChangeCount
@@ -64,7 +63,7 @@ class CounterInput extends React.Component {
 
         return {
           count,
-          inputValue: count,
+          inputValue: count.toString(),
         };
       },
       this.handleChangeCount
@@ -84,7 +83,7 @@ class CounterInput extends React.Component {
       this.setState(
         {
           count: num,
-          inputValue: num,
+          inputValue: num.toString(),
         },
         this.handleChangeCount
       );
