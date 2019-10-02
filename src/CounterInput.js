@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  * - snapshot tests
  */
 
-class CounterInput extends React.Component {
+class CounterInput extends React.PureComponent {
   constructor (props) {
     super(props);
 
