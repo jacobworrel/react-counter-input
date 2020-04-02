@@ -14,6 +14,8 @@ class CounterInput extends React.Component {
     this.state = {
       count: this.props.count,
       inputValue: this.props.count,
+      hideDec: this.hideDec(this.props.count),
+      hideInc: this.hideInc(this.props.count),
     };
   }
 
@@ -27,6 +29,14 @@ class CounterInput extends React.Component {
         this.handleChangeCount
       );
     }
+  }
+
+  hideDec(count){
+    return this.props.hideDisabledButtons && count === this.props.min
+  }
+
+  hideInc(count){
+    return this.props.hideDisabledButtons && count === this.props.max
   }
 
   decrement = () => {
@@ -91,6 +101,12 @@ class CounterInput extends React.Component {
   };
 
   handleChangeCount = () => {
+
+    this.setState({
+      hideInc: this.hideInc(this.state.count),
+      hideDec: this.hideDec(this.state.count),
+    })
+
     if (this.props.onCountChange !== undefined) {
       this.props.onCountChange(this.state.count);
     }
@@ -120,7 +136,6 @@ class CounterInput extends React.Component {
       handleChangeInput: this.handleChangeInput,
       handleBlur: this.handleBlur,
       increment: this.increment,
-      props: this.props,
       state: this.state,
     })
   }
@@ -146,18 +161,21 @@ const inputStyle = {
   fontSize: '1em',
 };
 
+const hiddenBtnStyle = {
+  ...{visibility:'hidden'},
+  ...btnStyle
+}
+
 const renderChildren = ({
   decrement,
   handleChangeInput,
   handleBlur,
   increment,
-  state: { inputValue },
+  state: { inputValue, hideInc, hideDec },
   style,
 }) => (
   <div style={style.wrapperStyle}>
-    {!props.hideDisabledButtons && inputValue === props.min &&
-    <div style={style.btnStyle} onClick={decrement}>&#8722;</div>
-    }
+    <div style={hideDec ? hiddenBtnStyle : style.btnStyle} onClick={decrement}>&#8722;</div>
     <input
       style={style.inputStyle}
       type="text"
@@ -165,7 +183,7 @@ const renderChildren = ({
       onChange={handleChangeInput}
       onBlur={handleBlur}
     />
-    <div style={style.btnStyle} onClick={increment}>&#43;</div>
+    <div style={hideInc ? hiddenBtnStyle : style.btnStyle} onClick={increment}>&#43;</div>
   </div>
 );
 

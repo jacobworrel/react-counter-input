@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
-import Example from '../../src'
+import ReactCounterInput from '../../src'
 
 class Demo extends Component {
   render() {
     return <div>
       <h1>react-counter-input Demo</h1>
-      <Example/>
+      <ReactCounterInput hideDisabledButtons min={0} max={10}/>
     </div>
   }
 }

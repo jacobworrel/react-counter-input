@@ -1,8 +1,8 @@
 /coverage
 /demo/dist
-/es
-/lib
+#/es
+#/lib
 /node_modules
-/umd
+#/umd
 npm-debug.log*
 .idea
