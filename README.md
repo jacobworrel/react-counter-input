@@ -58,6 +58,11 @@ The minimum count.
 
 Handler function that gets called with the current count anytime the count state changes.
 
+### hideDisabledButtons
+> `boolean` | optional, defaults to `false`
+
+Hide the increment and decrement buttons when the input is at max or min.
+
 ## Style Props
 Style props get merged in with the default styles, allowing you to override specific properties.
 
