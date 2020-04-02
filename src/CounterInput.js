@@ -120,6 +120,7 @@ class CounterInput extends React.Component {
       handleChangeInput: this.handleChangeInput,
       handleBlur: this.handleBlur,
       increment: this.increment,
+      props: this.props,
       state: this.state,
     })
   }
@@ -154,7 +155,9 @@ const renderChildren = ({
   style,
 }) => (
   <div style={style.wrapperStyle}>
+    {!props.hideDisabledButtons && inputValue === props.min &&
     <div style={style.btnStyle} onClick={decrement}>&#8722;</div>
+    }
     <input
       style={style.inputStyle}
       type="text"
@@ -169,12 +172,14 @@ const renderChildren = ({
 CounterInput.defaultProps = {
   children: renderChildren,
   count: 0,
+  hideDisabledButtons: false,
   max: Infinity,
   min: -Infinity,
 };
 
 CounterInput.propTypes = {
   count: PropTypes.number,
+  hideDisabledButtons: PropTypes.bool,
   max: PropTypes.number,
   min: PropTypes.number,
   onCountChange: PropTypes.func,
